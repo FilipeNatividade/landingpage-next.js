@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '/public/images/logo.svg'
 import S from './Header.module.scss'
+import { Button } from '../Button'
 
 export const Header = () => {
     return (
@@ -15,7 +16,7 @@ export const Header = () => {
                 <Link href='/'>Cases</Link>
             </div>
             <div>
-                <button className={S.button}>Fale conosco</button>
+                <Button title='Fale Conosco' kind='primary' />
             </div>
         </div>
     )
