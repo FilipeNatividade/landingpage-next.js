@@ -1,0 +1,49 @@
+@import '/styles/mixins/padding';
+@import '/styles/mixins/colors';
+
+.container {
+  @include Padding;
+  padding-top: 255px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 150px;
+}
+
+.texts {
+  margin-top: 80px;
+  span {
+    color: $green-color2;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  h1 {
+    font-size: 65px;
+    margin-bottom: 3rem;
+  }
+  p {
+    font-size: 30px;
+    font-weight: lighter;
+    opacity: 0.7;
+  }
+}
+
+.form {
+  background-color: $white-color;
+  border-radius: 10px;
+  padding: 38px 31px;
+  border: 0.5px solid $gray-color3;
+  gap: 18px;
+
+  h1 {
+    color: $purple-color;
+    font-size: 35px;
+    margin-bottom: 30px;
+  }
+  form {
+    display: grid;
+    gap: 23px;
+  }
+}

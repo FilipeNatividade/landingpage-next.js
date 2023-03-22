@@ -5,7 +5,7 @@
   @include Padding;
   background-image: url('/images/welcomeBg.svg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   display: grid;
   padding-top: 219px;
   grid-template-columns: repeat(2, 1fr);
