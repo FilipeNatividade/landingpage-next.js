@@ -1,4 +1,16 @@
+@import '/styles/mixins/colors.scss';
+@import '/styles/mixins/padding.scss';
+
 .container {
+  @include Padding;
+  background-image: url('/images/welcomeBg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  padding-top: 219px;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100vh;
+  width: 100vw;
 }
 
 .text {
@@ -8,9 +20,11 @@
   }
   p {
     font-size: 30px;
-    opacity: 0.8;
+    opacity: 0.7;
+    margin: 1rem 0;
   }
 }
 
 .image {
+  text-align: end;
 }

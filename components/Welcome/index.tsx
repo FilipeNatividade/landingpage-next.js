@@ -1,6 +1,8 @@
 import React from 'react'
-import S from './Welcome.module.scss'
 import { Button } from '../Button'
+import LeadsWelcome from '/public/images/leads.svg'
+import S from './Welcome.module.scss'
+import Image from 'next/image'
 
 export const Welcome = () => {
     return (
@@ -10,7 +12,9 @@ export const Welcome = () => {
                 <p>Somos uma agência de performance digital, aceleramos vendas e aquisição de leads para grandes marcas.</p>
                 <Button title='Aumentar vendas' kind='secundary' />
             </div>
-            <div className={S.image}></div>
+            <div className={S.image}>
+                <Image src={LeadsWelcome} alt='imagem de leads' />
+            </div>
         </div>
     )
 }
