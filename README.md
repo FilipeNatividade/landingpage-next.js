@@ -39,4 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # landingpagenext.js
 # landingpage-next.js-frontacademy
 
-**bold**
+
+
+
+![alt text](https://imgs.search.brave.com/pBE5oPa4vmcxvKOehFNIk4ITfsie9NDmkhbxLHkcM7k/rs:fit:1085:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5t/VGhQdExpcHEyNGxN/MTV0SnUwNmN3SGFE/UCZwaWQ9QXBp "Title")
