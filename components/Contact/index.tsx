@@ -3,6 +3,7 @@ import S from './Contact.module.scss';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Select } from '../Select';
+import Link from 'next/link';
 
 export const Contact = () => {
     return (
@@ -46,6 +47,9 @@ export const Contact = () => {
                         ]} />
                     <Button title='Enviar' kind='full' />
                 </form>
+            </div>
+            <div className={S.footer}>
+                <p>Ao enviar esse formulário, você reconhece que leu e concorda com a nossa <Link href='/'><span> Política de Privacidade</span></Link>.</p>
             </div>
         </div>
     )
