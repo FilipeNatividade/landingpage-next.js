@@ -1,9 +1,10 @@
 @import '/styles/mixins/colors.scss';
+@import '/styles/mixins/fonts.scss';
 
 .button {
   padding: 15px 50px;
   border-radius: 5px;
-  font-size: 16px;
+  @include SizeNormal;
   font-weight: bold;
 
   &.primary {
@@ -17,7 +18,6 @@
   }
 
   &.full {
-    // @include SizeNormal;
     padding: 21px;
     width: 100%;
     font-weight: 600;

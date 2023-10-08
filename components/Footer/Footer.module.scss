@@ -1,5 +1,7 @@
 @import '/styles/mixins/colors.scss';
 @import '/styles/mixins/padding.scss';
+@import '/styles/mixins/fonts.scss';
+@import '/styles/mixins/responsive.scss';
 
 .container {
   @include Padding;
@@ -7,6 +9,12 @@
   background-color: $purple-color3;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+
+  @include Phone {
+    grid-template-columns: 1fr;
+    padding-top: 1rem;
+    gap: 1rem;
+  }
 }
 
 .column {
@@ -17,21 +25,25 @@
   }
 
   .title {
-    font-size: 29px;
+    @include SizeNormal;
     color: $white-color;
   }
   h1 {
-    font-size: 24px;
+    @include SizeNormal;
     color: $green-color2;
     margin-bottom: 2rem;
   }
   p {
-    font-size: 22px;
+    @include SizeNormal;
     margin-bottom: 1rem;
   }
 
   &.social {
-      text-align: right;
+    text-align: right;
+
+    @include Phone {
+      text-align: left;
+    }
   }
 
   .icon {
@@ -39,14 +51,30 @@
     svg {
       width: 40px;
       height: 40px;
+
+      @include Phone {
+        width: 40px;
+      }
     }
+
+    @include Phone {
+      margin-top: 0;
+    }
+  }
+
+  @include Phone {
+    margin-top: 0;
   }
 }
 
 .allRightReserved {
   padding: 6rem 0 3rem;
-  font-size: 20px;
+  @include SizeNormal;
   color: $gray-color;
   grid-column: span 4;
   text-align: center;
+
+  @include Phone {
+    grid-column: 1;
+  }
 }

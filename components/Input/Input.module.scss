@@ -1,4 +1,5 @@
 @import '/styles/mixins/colors.scss';
+@import '/styles/mixins/fonts.scss';
 
 .input {
   padding: 22px 17px;
@@ -8,4 +9,5 @@
   color: $gray-color5;
   opacity: 0.7;
   border-radius: 10px;
+  @include SizeNormal;
 }

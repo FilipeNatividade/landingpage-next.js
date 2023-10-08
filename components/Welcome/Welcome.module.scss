@@ -1,25 +1,44 @@
 @import '/styles/mixins/colors.scss';
 @import '/styles/mixins/padding.scss';
+@import '/styles/mixins/responsive.scss';
+@import '/styles/mixins/fonts.scss';
 
 .container {
   @include Padding;
   background-image: url('/images/welcomeBg.svg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   display: grid;
   padding-top: 219px;
   grid-template-columns: repeat(2, 1fr);
   height: 100vh;
   width: 100vw;
+
+  @include Phone {
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
+    padding-top: 1rem;
+  }
+
+  @include Tablet {
+    height: 100%;
+    margin-bottom: 4rem;
+    padding-top: 4rem;
+  }
+
+  @include Laptop {
+    padding-top: 6rem;
+  }
 }
 
 .text {
   h1 {
-    font-size: 71px;
+    @include SizeExtra;
     font-weight: bold;
   }
   p {
-    font-size: 30px;
+    @include SizeMedium;
     opacity: 0.7;
     margin: 1rem 0;
   }
@@ -27,4 +46,13 @@
 
 .image {
   text-align: end;
+
+  @include Phone {
+    text-align: center;
+    grid-column: 1;
+    grid-row: 1;
+    img {
+      width: 100% !important;
+    }
+  }
 }
