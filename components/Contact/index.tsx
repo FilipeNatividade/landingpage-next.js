@@ -4,8 +4,21 @@ import { Button } from '../Button';
 import { Input } from '../Input';
 import { Select } from '../Select';
 import Link from 'next/link';
+import axios from 'axios';
 
 export const Contact = () => {
+
+
+    const sendEmail = (e) => {
+        e.preventDefault()
+        axios.post('/api/sendEmail', {
+            messageBody: `Nome: ${nome}, Email: ${email}, Telefone:${telefone}, Site:${site}, Midia:${midia}, `
+        }).then(result => {
+            console.log(result)
+        }).catch(err => console.log(err))
+    }
+
+
     return (
         <div className={S.container}>
             <div className={S.texts}>
@@ -15,7 +28,7 @@ export const Contact = () => {
             </div>
             <div className={S.form}>
                 <h1>Fale com um especialista</h1>
-                <form>
+                <form onSubmit={sendEmail}>
                     <Input
                         type="text"
                         placeholder='Nome completo'

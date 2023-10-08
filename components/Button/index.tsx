@@ -11,6 +11,6 @@ export const Button = ({ title, kind }: { title: string, kind: "primary" | "secu
     }
 
     return (
-        <button className={`${S.button} ${generationClassByKind()}`} onClick={() => console.log('title:', title)}>{title}</button>
+        <button className={`${S.button} ${generationClassByKind()}`}>{title}</button>
     )
 }
