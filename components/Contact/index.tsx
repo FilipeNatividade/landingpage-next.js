@@ -8,8 +8,14 @@ import axios from 'axios';
 
 export const Contact = () => {
 
+    let nome: string = ''
+    let email: string = ''
+    let telefone: string = ''
+    let site: string = ''
+    let midia: string = ''
 
-    const sendEmail = (e) => {
+
+    const sendEmail = (e: any) => {
         e.preventDefault()
         axios.post('/api/sendEmail', {
             messageBody: `Nome: ${nome}, Email: ${email}, Telefone:${telefone}, Site:${site}, Midia:${midia}, `
