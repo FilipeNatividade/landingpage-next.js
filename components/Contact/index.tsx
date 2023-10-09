@@ -1,75 +1,146 @@
-import React from 'react'
-import S from './Contact.module.scss';
+import React, { useState } from 'react'
+import axios from 'axios';
+import Link from 'next/link';
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
+
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Select } from '../Select';
-import Link from 'next/link';
-import axios from 'axios';
+import { Loading } from '../Loading';
+import { SuccessModal } from '../SuccessModal';
+import { FailModal } from '../FailModal';
+
+import S from './Contact.module.scss';
 
 export const Contact = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [successModal, setSuccessModal] = useState(false)
+    const [failModal, setFailModal] = useState(false)
 
-    let nome: string = ''
-    let email: string = ''
-    let telefone: string = ''
-    let site: string = ''
-    let midia: string = ''
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            phone: '',
+            webSite: '',
+            midia: '',
+        },
+        validationSchema: Yup.object({
+            name: Yup.string()
+                .required('Campo obrigatório'),
+            email: Yup.string()
+                .email('E-mail inválido')
+                .required('Campo obrigatório'),
+            phone: Yup.string()
+                .required('Campo obrigatório'),
+            webSite: Yup.string()
+                .required('Campo obrigatório'),
+            midia: Yup.string()
+                .required('Campo obrigatório'),
+        }),
+        validateOnChange: false,
+        validateOnBlur: false,
+        onSubmit: (values) => handleSubmitForm(values)
+    })
 
 
-    const sendEmail = (e: any) => {
-        e.preventDefault()
-        axios.post('/api/sendEmail', {
-            messageBody: `Nome: ${nome}, Email: ${email}, Telefone:${telefone}, Site:${site}, Midia:${midia}, `
-        }).then(result => {
-            console.log(result)
-        }).catch(err => console.log(err))
+    const handleSubmitForm = (value: any) => {
+        setIsLoading(true)
+        axios
+            .post('/api/sendEmail', {
+                messageBody: `Nome: ${value.name}, Email: ${value.email}, Telefone:${value.phone}, Site:${value.webSite}, Midia:${value.midia}`
+            }).then(result => {
+                formik.resetForm()
+                setIsLoading(false)
+                setSuccessModal(true)
+            }).catch(err => {
+                setIsLoading(false)
+                setFailModal(true)
+            }
+            )
     }
 
+    const closeModal = () => {
+        setFailModal(false)
+        setSuccessModal(false)
+    }
 
     return (
-        <div className={S.container}>
-            <div className={S.texts}>
-                <span>ENTRE EM CONTATO</span>
-                <h1>Aumente seu resultado de vendas e performance</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+        <>
+            {successModal && <SuccessModal closeModal={closeModal} />}
+            {failModal && <FailModal closeModal={closeModal} />}
+            {isLoading && <Loading />}
+            <div className={S.container} id='contato'>
+                <div className={S.texts}>
+                    <span>ENTRE EM CONTATO</span>
+                    <h1>Aumente seu resultado de vendas e performance</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                </div>
+                <div className={S.form}>
+                    <h1>Fale com um especialista</h1>
+                    <form id='formulario' onSubmit={formik.handleSubmit}>
+                        <Input
+                            id='name'
+                            name='name'
+                            type="text"
+                            placeholder='Nome completo'
+                            required={true}
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.name}
+                        />
+                        <Input
+                            id='email'
+                            name='email'
+                            type="email"
+                            placeholder='E-mail profissional'
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            required={true}
+                            value={formik.values.email}
+                        />
+                        <Input
+                            id='phone'
+                            name='phone'
+                            type="text"
+                            placeholder='Celular/Whatsapp'
+                            // pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+                            required={true}
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.phone}
+                        />
+                        <Input
+                            id='webSite'
+                            name='webSite'
+                            type="text"
+                            placeholder='Site'
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            required={false}
+                            value={formik.values.webSite}
+                        />
+                        <Select
+                            id='midia'
+                            name='midia'
+                            placeholder='Orçamento para mídia' required={true}
+                            onChange={formik.handleChange}
+                            value={formik.values.midia}
+                            options={[
+                                { value: 'instagram', label: 'Instagram' }, { value: 'Facebook', label: 'Facebook' }
+                            ]} />
+                        <Button
+                            type='submit'
+                            title='Enviar'
+                            kind='full'
+                        />
+                    </form>
+                </div>
+                <div className={S.footer}>
+                    <p>Ao enviar esse formulário, você reconhece que leu e concorda com a nossa <Link href='/'><span> Política de Privacidade</span></Link>.</p>
+                </div>
             </div>
-            <div className={S.form}>
-                <h1>Fale com um especialista</h1>
-                <form onSubmit={sendEmail}>
-                    <Input
-                        type="text"
-                        placeholder='Nome completo'
-                        required={true}
-                        pattern={undefined}
-                    />
-                    <Input
-                        type="email"
-                        placeholder='E-mail profissional'
-                        pattern={undefined}
-                        required={true}
-                    />
-                    <Input
-                        type="text"
-                        placeholder='Celular/Whatsapp'
-                        pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
-                        required={true}
-                    />
-                    <Input
-                        type="text"
-                        placeholder='Site'
-                        pattern={undefined}
-                        required={false}
-                    />
-                    <Select
-                        placeholder='Orçamento para mídia' required={true}
-                        options={[
-                            { value: 1, label: 'Instagram' }, { value: 2, label: 'Facebook' }
-                        ]} />
-                    <Button title='Enviar' kind='full' />
-                </form>
-            </div>
-            <div className={S.footer}>
-                <p>Ao enviar esse formulário, você reconhece que leu e concorda com a nossa <Link href='/'><span> Política de Privacidade</span></Link>.</p>
-            </div>
-        </div>
+        </>
     )
 }

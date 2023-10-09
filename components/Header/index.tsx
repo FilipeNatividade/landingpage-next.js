@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button } from '../Button'
+import { ScrollTo } from '../../utils/scrollTo'
 import Logo from '/public/images/logo.svg'
 import S from './Header.module.scss'
-import { Button } from '../Button'
 
 export const Header = () => {
     return (
@@ -16,7 +17,7 @@ export const Header = () => {
                 <Link href='/'>Cases</Link>
             </div>
             <div className={S.action}>
-                <Button title='Fale Conosco' kind='primary' />
+                <Button title='Fale Conosco' kind='primary' onClick={() => ScrollTo('contato')} />
             </div>
         </div>
     )

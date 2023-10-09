@@ -2,7 +2,17 @@ import React from 'react'
 import S from './Button.module.scss'
 
 
-export const Button = ({ title, kind }: { title: string, kind: "primary" | "secundary" | "full" }) => {
+export const Button = ({
+    title,
+    kind,
+    type,
+    onClick,
+}: {
+    title?: string,
+    kind?: "primary" | "secundary" | "full",
+    type?: any | undefined,
+    onClick?: any
+}) => {
 
     const generationClassByKind = () => {
         if (kind === 'secundary') return S.secondary;
@@ -11,6 +21,12 @@ export const Button = ({ title, kind }: { title: string, kind: "primary" | "secu
     }
 
     return (
-        <button className={`${S.button} ${generationClassByKind()}`}>{title}</button>
+        <button
+            type={type}
+            className={`${S.button} ${generationClassByKind()}`}
+            onClick={onClick}
+        >
+            {title}
+        </button>
     )
 }
